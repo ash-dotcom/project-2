@@ -1,0 +1,63 @@
+[
+{"products":
+{"product":
+{
+   "productid" : 9,
+    "name" : "Ideapad",
+   "description": "Lenovo laptop",
+ 
+   "originalPrice": 4500,
+   "offer":{
+   "offerPrice": 4500,
+   "offerValid_until": "2020-07-13 11:49:57",
+   "brandName": "Lenovo"
+
+},
+	"image":
+	[
+	"image1.jpeg",
+	"image2.jpeg"
+	]
+}
+}
+},
+{
+   "productid" : 10,
+    "name" : "Avia",
+   "description": "Avia laptop",
+   
+   "originalPrice": 4500,
+     "brandName": "HP",
+   "offer":{
+   "offerPrice": 4500,
+   "offerValid_until": "2020-07-13 11:49:57"
+ 
+
+},
+
+	"country":
+	[
+	"US",
+	"INSIA"
+	]
+},
+
+{	 "productid" : 11,
+    "name" : "Monaco",
+   "description": "Monaco laptop",
+  
+   "originalPrice": 4500,
+   "offer":{
+   "offerPrice": 4500,
+   "offerValid_until": "2020-07-13 11:49:57",
+   "brandName": "DELL"
+
+},
+	"image":
+	[
+	"image1.jpeg",
+	"image2.jpeg"
+	]
+}
+
+]

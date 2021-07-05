@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:sockets="http://www.mulesoft.org/schema/mule/sockets"
+	xmlns:email="http://www.mulesoft.org/schema/mule/email"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/email http://www.mulesoft.org/schema/mule/email/current/mule-email.xsd
+http://www.mulesoft.org/schema/mule/sockets http://www.mulesoft.org/schema/mule/sockets/current/mule-sockets.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<email:smtp-config name="Email_SMTP" doc:name="Email SMTP" doc:id="da3a99bf-367e-4a59-9e2b-43ac7c87b881" >
+		<email:smtp-connection host="smtp.gmail.com" port="587" user="ashwinibute64@gmail.com" password="ashwini@1" >
+			<email:properties >
+				<email:property key="mail.smtp.starttls.enable" value="true" />
+			</email:properties>
+		</email:smtp-connection>
+	</email:smtp-config>
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="f0a1d337-c168-44a1-a477-53c4b9d60163" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="mailFlow" doc:id="d9057a15-8ea3-4b8f-b81c-a28937bcb493" >
+		<http:listener doc:name="Listener" doc:id="db00ad81-645b-4299-ad91-e1ab6a09c243" config-ref="HTTP_Listener_config" path="/mail"/>
+		<email:send doc:name="Send" doc:id="4f7a15a6-c209-46ae-bc8c-31af938ade63" config-ref="Email_SMTP" fromAddress="ashwinibute64@gmail.com">
+			<email:to-addresses >
+				<email:to-address value="aksy05bhure@gmail.com" />
+			</email:to-addresses>
+			<email:body contentType="text/html">
+				<email:content ><![CDATA[#["<h1>Mule Email Send Successfully</h1>"]]]></email:content>
+			</email:body>
+			<email:attachments ><![CDATA[#[{
+	"complex2.xml":payload
+}]]]></email:attachments>
+		</email:send>
+		<ee:transform doc:name="Transform Message" doc:id="a6a8f3b9-2ead-463c-919f-7c7d66a6ceb2" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	Message:"Successfully Mail Send"
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
